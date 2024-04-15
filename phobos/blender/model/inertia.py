@@ -201,6 +201,9 @@ def combine_com_3x3(objects):
     for obj in objects:
         combined_com = combined_com + obj.matrix_local.translation * obj['mass']
         combined_mass += obj['mass']
+    if combined_mass == 0:
+        log("No mass found in objects...", 'DEBUG')
+        return 0.0, mathutils.Vector((0.0,) * 3)
     combined_com = combined_com / combined_mass
     log("  Combined center of mass: " + str(combined_com), 'DEBUG')
     return combined_mass, combined_com
